@@ -1,0 +1,10 @@
+{
+  "name": "matdol-icon-gen",
+  "private": true,
+  "description": "Generates matdol icons (Assets/Icons) and the empty-slot animation (Assets/Empty64). Usage: npm install && node clean.js out",
+  "license": "MIT",
+  "dependencies": {
+    "@resvg/resvg-js": "^2.6.2",
+    "polygon-clipping": "^0.15.7"
+  }
+}

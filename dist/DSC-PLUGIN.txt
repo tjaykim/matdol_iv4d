@@ -1,0 +1,35 @@
+matdol — VESA DSC (.dsc) plugin
+================================
+
+matdol opens VESA DSC bitstream files (.dsc) only when the separate, optional
+decoder plugin (Matdol.Dsc.dll) is installed. The plugin is an open-source
+project that is distributed as source code only — no prebuilt binaries are
+provided, so you build it yourself:
+
+    https://github.com/tjaykim/matdol-dsc
+
+Install
+  1. Install the .NET 8 SDK (8.0.100 or later):
+     https://dotnet.microsoft.com/download/dotnet/8.0
+  2. Get the source (git clone, or "Code > Download ZIP" on GitHub) and build
+     the library in the repository folder:
+
+         dotnet build src/Matdol.Dsc -c Release
+
+     Result: src/Matdol.Dsc/bin/Release/net8.0/Matdol.Dsc.dll
+     (The same Matdol.Dsc.dll works on Windows, Linux and macOS. See the
+     repository's README, "Building", for details.)
+  3. Copy Matdol.Dsc.dll into your matdol plugin folder (no admin rights
+     needed; create the folder if it does not exist):
+         Windows : %APPDATA%\matdol\plugins
+         Linux   : ~/.config/matdol/plugins
+         macOS   : ~/.config/matdol/plugins
+     (Copying it next to the matdol executable, or into a "plugins" folder
+     there, also works.)
+  4. Restart matdol. Help (F1) shows "VESA DSC (.dsc) plugin: installed".
+
+Without the plugin, .dsc files open as headerless raw binary data.
+
+Note: VESA DSC is a standard covered by patents of VESA member companies.
+The plugin is kept separate, as source code only, so that you decide
+whether to build and use it.

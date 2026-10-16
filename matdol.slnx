@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="matdol.csproj" />
+  <Project Path="Matdol.Codecs/Matdol.Codecs.csproj" />
+</Solution>

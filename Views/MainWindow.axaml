@@ -1,0 +1,376 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:c="clr-namespace:Matdol.Controls"
+        x:Class="Matdol.Views.MainWindow"
+        Title="matdol" Width="1280" Height="760" MinWidth="320" MinHeight="240"
+        Background="#1F2D31" DragDrop.AllowDrop="True">
+
+  <Window.Resources>
+    <StreamGeometry x:Key="IcOpen">M2 5a1 1 0 0 1 1-1h6l2 2h10a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z M4 9v9h16V9z</StreamGeometry>
+    <StreamGeometry x:Key="IcCapture">M9 4h6l1.5 2H20a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h3.5z M12 8.5a4.5 4.5 0 1 0 0 9a4.5 4.5 0 0 0 0-9z M12 10.5a2.5 2.5 0 1 1 0 5a2.5 2.5 0 0 1 0-5z</StreamGeometry>
+    <StreamGeometry x:Key="IcFormat">F1 M3 6h18v2H3z M3 11h18v2H3z M3 16h18v2H3z M7 4h3v6H7z M14 9h3v6h-3z M9 14h3v6H9z</StreamGeometry>
+    <StreamGeometry x:Key="IcColor">F1 M4 12a3.2 3.2 0 1 0 6.4 0a3.2 3.2 0 1 0-6.4 0z M8.8 12a3.2 3.2 0 1 0 6.4 0a3.2 3.2 0 1 0-6.4 0z M13.6 12a3.2 3.2 0 1 0 6.4 0a3.2 3.2 0 1 0-6.4 0z</StreamGeometry>
+    <StreamGeometry x:Key="IcGrid">M3 3h5v5H3z M9.5 3h5v5h-5z M16 3h5v5h-5z M3 9.5h5v5H3z M9.5 9.5h5v5h-5z M16 9.5h5v5h-5z M3 16h5v5H3z M9.5 16h5v5h-5z M16 16h5v5h-5z</StreamGeometry>
+    <StreamGeometry x:Key="IcPixel">M11 2h2v6h-2z M11 16h2v6h-2z M2 11h6v2H2z M16 11h6v2h-6z M12 9a3 3 0 1 0 0 6a3 3 0 0 0 0-6z M12 10.5a1.5 1.5 0 1 1 0 3a1.5 1.5 0 0 1 0-3z</StreamGeometry>
+    <StreamGeometry x:Key="IcInfo">M12 2a10 10 0 1 0 0 20a10 10 0 0 0 0-20z M12 4a8 8 0 1 1 0 16a8 8 0 0 1 0-16z M11 10.5h2V17h-2z M11 6.5h2v2.5h-2z</StreamGeometry>
+    <StreamGeometry x:Key="IcFirst">M4.5 6h2v12h-2z M13 6v12l-6-6z M20 6v12l-6-6z</StreamGeometry>
+    <StreamGeometry x:Key="IcPrev">M7 6h2v12H7z M17.5 6v12l-7.5-6z</StreamGeometry>
+    <StreamGeometry x:Key="IcPlay">M8 6l10 6-10 6z</StreamGeometry>
+    <StreamGeometry x:Key="IcPause">M7 6h3.5v12H7z M13.5 6H17v12h-3.5z</StreamGeometry>
+    <StreamGeometry x:Key="IcNext">M15 6h2v12h-2z M6.5 6v12l7.5-6z</StreamGeometry>
+    <StreamGeometry x:Key="IcLast">M17.5 6h2v12h-2z M4 6v12l6-6z M11 6v12l6-6z</StreamGeometry>
+    <StreamGeometry x:Key="IcLoop">F1 M17 3l4 4-4 4V8H8a3 3 0 0 0-3 3v1H3v-1a5 5 0 0 1 5-5h9z M7 21l-4-4 4-4v3h9a3 3 0 0 0 3-3v-1h2v1a5 5 0 0 1-5 5H7z</StreamGeometry>
+    <StreamGeometry x:Key="IcCompare">M12 2a10 10 0 1 0 0 20a10 10 0 0 0 0-20z M12 4a8 8 0 1 1 0 16a8 8 0 0 1 0-16z M12 6a6 6 0 0 0 0 12z</StreamGeometry>
+    <StreamGeometry x:Key="IcSplit">M3 3h18v18H3z M5 5v6h6V5z M13 5v6h6V5z M5 13v6h6v-6z M13 13v6h6v-6z</StreamGeometry>
+    <StreamGeometry x:Key="IcSolo">M3 3h18v18H3z M5 5v14h14V5z</StreamGeometry>
+    <StreamGeometry x:Key="IcFull">M3 3h6v2H5v4H3z M15 3h6v6h-2V5h-4z M3 15h2v4h4v2H3z M19 15h2v6h-6v-2h4z</StreamGeometry>
+    <StreamGeometry x:Key="IcPin">M8 2.5h8v2h-1.5v5.2l3.5 3.3v2.3h-5v6.2l-1 1.3-1-1.3v-6.2H6v-2.3l3.5-3.3V4.5H8z</StreamGeometry>
+    <StreamGeometry x:Key="IcHelp">M12 2a10 10 0 1 0 0 20a10 10 0 0 0 0-20z M12 4a8 8 0 1 1 0 16a8 8 0 0 1 0-16z M12 6.5a3.5 3.5 0 0 0-3.5 3.5h2a1.5 1.5 0 1 1 2.6 1L12 12.2V14h2v-1l.6-.6A3.5 3.5 0 0 0 12 6.5z M11 15.5h2v2h-2z</StreamGeometry>
+  </Window.Resources>
+
+  <Window.Styles>
+    <Style Selector="Button.tb">
+      <Setter Property="Width" Value="36"/>
+      <Setter Property="Height" Value="36"/>
+      <Setter Property="Padding" Value="0"/>
+      <Setter Property="Margin" Value="1,2"/>
+      <Setter Property="Background" Value="#90262C31"/>
+      <Setter Property="Foreground" Value="#C9D1D6"/>
+      <Setter Property="BorderThickness" Value="0"/>
+      <Setter Property="CornerRadius" Value="8"/>
+      <Setter Property="HorizontalContentAlignment" Value="Center"/>
+      <Setter Property="VerticalContentAlignment" Value="Center"/>
+      <Setter Property="FontFamily" Value="Consolas,Menlo,DejaVu Sans Mono,monospace"/>
+      <Setter Property="FontSize" Value="13"/>
+      <Setter Property="FontWeight" Value="SemiBold"/>
+    </Style>
+    <Style Selector="Button.tb:pointerover /template/ ContentPresenter"><Setter Property="Background" Value="#3A434A"/></Style>
+    <Style Selector="Button.tb:pressed /template/ ContentPresenter"><Setter Property="Background" Value="#4A555D"/></Style>
+    <Style Selector="Button.tb.on"><Setter Property="Background" Value="#1F7A8C"/><Setter Property="Foreground" Value="#F2FBFD"/></Style>
+    <Style Selector="Button.tb.on:pointerover /template/ ContentPresenter"><Setter Property="Background" Value="#2A93A8"/></Style>
+        <Style Selector="Button.tb:disabled"><Setter Property="Opacity" Value="0.35"/></Style>
+    <Style Selector="Button.tb PathIcon"><Setter Property="Width" Value="18"/><Setter Property="Height" Value="18"/></Style>
+    <Style Selector="Button.tb.sub"><Setter Property="Margin" Value="6,2,1,2"/></Style>
+    <Style Selector="Border.glyph">
+      <Setter Property="Width" Value="20"/><Setter Property="Height" Value="20"/>
+      <Setter Property="BorderThickness" Value="1.5"/><Setter Property="CornerRadius" Value="4"/>
+      <Setter Property="BorderBrush" Value="{Binding $parent[Button].Foreground}"/>
+    </Style>
+    <Style Selector="Border.glyph > TextBlock">
+      <Setter Property="HorizontalAlignment" Value="Center"/><Setter Property="VerticalAlignment" Value="Center"/>
+      <Setter Property="FontSize" Value="11"/><Setter Property="Margin" Value="0,-1,0,0"/>
+    </Style>
+    <Style Selector="Border.badge">
+      <Setter Property="Width" Value="14"/><Setter Property="Height" Value="14"/><Setter Property="CornerRadius" Value="7"/>
+      <Setter Property="VerticalAlignment" Value="Top"/><Setter Property="IsVisible" Value="False"/>
+      <Setter Property="BorderThickness" Value="1"/><Setter Property="BorderBrush" Value="#C0161B1F"/>
+    </Style>
+    <Style Selector="Border.badge.b"><Setter Property="Background" Value="#D4922A"/><Setter Property="HorizontalAlignment" Value="Right"/><Setter Property="Margin" Value="0,-2,-2,0"/></Style>
+        <Style Selector="Border.badge > TextBlock">
+      <Setter Property="FontSize" Value="9"/><Setter Property="FontWeight" Value="Bold"/><Setter Property="Foreground" Value="White"/>
+      <Setter Property="HorizontalAlignment" Value="Center"/><Setter Property="VerticalAlignment" Value="Center"/><Setter Property="Margin" Value="0,-1,0,0"/>
+    </Style>
+    <Style Selector="Border.tag">
+      <Setter Property="Width" Value="28"/><Setter Property="Height" Value="28"/><Setter Property="CornerRadius" Value="14"/>
+      <Setter Property="HorizontalAlignment" Value="Right"/><Setter Property="VerticalAlignment" Value="Top"/>
+      <Setter Property="Margin" Value="0,8,8,0"/><Setter Property="IsVisible" Value="False"/><Setter Property="IsHitTestVisible" Value="False"/>
+    </Style>
+    <Style Selector="Border.tag.b"><Setter Property="Background" Value="#A0D4922A"/></Style>
+        <Style Selector="Border.tag > TextBlock">
+      <Setter Property="FontSize" Value="15"/><Setter Property="FontWeight" Value="Bold"/><Setter Property="Foreground" Value="#D0FFFFFF"/>
+      <Setter Property="HorizontalAlignment" Value="Center"/><Setter Property="VerticalAlignment" Value="Center"/><Setter Property="Margin" Value="0,-1,0,0"/>
+    </Style>
+    <Style Selector="Border.sep">
+      <Setter Property="Width" Value="1"/><Setter Property="Height" Value="22"/><Setter Property="Margin" Value="9,0"/>
+      <Setter Property="Background" Value="#33FFFFFF"/>
+    </Style>
+    <Style Selector="Border.panel">
+      <Setter Property="HorizontalAlignment" Value="Center"/>
+      <Setter Property="Opacity" Value="0"/><Setter Property="IsHitTestVisible" Value="False"/>
+      <Setter Property="Transitions">
+        <Transitions><DoubleTransition Property="Opacity" Duration="0:0:0.18"/></Transitions>
+      </Setter>
+    </Style>
+    <Style Selector="Button.pin">
+      <Setter Property="Width" Value="18"/><Setter Property="Height" Value="18"/><Setter Property="Padding" Value="0"/>
+      <Setter Property="CornerRadius" Value="9"/><Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="BorderBrush" Value="#30FFFFFF"/><Setter Property="Background" Value="#E0161B1F"/>
+      <Setter Property="Foreground" Value="#8A949B"/>
+      <Setter Property="HorizontalAlignment" Value="Right"/>
+      <Setter Property="HorizontalContentAlignment" Value="Center"/><Setter Property="VerticalContentAlignment" Value="Center"/>
+    </Style>
+    <Style Selector="Button.pin PathIcon">
+      <Setter Property="Width" Value="11"/><Setter Property="Height" Value="11"/>
+      <Setter Property="RenderTransform" Value="rotate(45deg)"/>
+    </Style>
+    <Style Selector="Button.pin:pointerover /template/ ContentPresenter"><Setter Property="Background" Value="#3A434A"/></Style>
+    <Style Selector="Button.pin:pointerover"><Setter Property="Foreground" Value="#E6ECEF"/></Style>
+    <Style Selector="Button.pin.on"><Setter Property="Background" Value="#1F7A8C"/><Setter Property="Foreground" Value="#F2FBFD"/></Style>
+    <Style Selector="Button.pin.on:pointerover /template/ ContentPresenter"><Setter Property="Background" Value="#2A93A8"/></Style>
+    <Style Selector="Button.pin.on PathIcon"><Setter Property="RenderTransform" Value="rotate(0deg)"/></Style>
+    <Style Selector="Border.panelbg">
+      <Setter Property="Background" Value="#70161B1F"/><Setter Property="BorderBrush" Value="#30FFFFFF"/>
+      <Setter Property="BorderThickness" Value="1"/><Setter Property="CornerRadius" Value="12"/>
+    </Style>
+    <Style Selector="Border.panel > Panel > StackPanel.content"><Setter Property="Margin" Value="8,6"/></Style>
+    <Style Selector="StackPanel.pop :is(TemplatedControl)"><Setter Property="FontSize" Value="12"/></Style>
+    <Style Selector="StackPanel.pop ComboBoxItem"><Setter Property="FontSize" Value="12"/><Setter Property="MinHeight" Value="28"/><Setter Property="Padding" Value="10,4"/></Style>
+    <Style Selector="StackPanel.pop NumericUpDown /template/ TextBox"><Setter Property="FontSize" Value="12"/><Setter Property="MinHeight" Value="28"/><Setter Property="Padding" Value="8,4,6,4"/></Style>
+    <Style Selector="StackPanel.pop ComboBox"><Setter Property="MinHeight" Value="28"/><Setter Property="Padding" Value="10,4,0,4"/></Style>
+    <Style Selector="StackPanel.pop NumericUpDown"><Setter Property="MinHeight" Value="28"/></Style>
+    <Style Selector="StackPanel.pop RadioButton"><Setter Property="MinWidth" Value="0"/></Style>
+    <Style Selector="CheckBox.helpopt">
+      <Setter Property="MinHeight" Value="0"/><Setter Property="Margin" Value="0,-5"/><Setter Property="Padding" Value="6,0,0,0"/>
+      <Setter Property="FontSize" Value="11"/><Setter Property="Foreground" Value="#8FA9BA"/>
+      <Setter Property="VerticalContentAlignment" Value="Center"/>
+    </Style>
+    <Style Selector="StackPanel.pop > TextBlock">
+      <Setter Property="Foreground" Value="#9AA4AB"/><Setter Property="FontSize" Value="11"/><Setter Property="Margin" Value="0,8,0,3"/>
+    </Style>
+    <Style Selector="Border.slot"><Setter Property="BorderThickness" Value="2"/><Setter Property="BorderBrush" Value="#141E21"/><Setter Property="Background" Value="#1F2D31"/></Style>
+    <Style Selector="Border.slot.a"><Setter Property="BorderBrush" Value="#17A2B8"/></Style>
+    <Style Selector="Border.slot.b"><Setter Property="BorderBrush" Value="#D4922A"/></Style>
+    <Style Selector="Border.slot.ab">
+      <Setter Property="BorderBrush">
+        <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,0%">
+          <GradientStop Offset="0.5" Color="#17A2B8"/><GradientStop Offset="0.5" Color="#D4922A"/>
+        </LinearGradientBrush>
+      </Setter>
+    </Style>
+    <Style Selector="c|OutlineText.slotlabel">
+      <Setter Property="HorizontalAlignment" Value="Left"/><Setter Property="VerticalAlignment" Value="Top"/>
+      <Setter Property="Margin" Value="6,4,44,0"/><Setter Property="IsHitTestVisible" Value="False"/>
+    </Style>
+  </Window.Styles>
+
+  <Panel Name="Root">
+    <Grid Name="SlotGrid" RowDefinitions="*,*" ColumnDefinitions="*,*">
+      <Border Name="Slot1" Classes="slot" Grid.Row="0" Grid.Column="0"><Panel><c:ImageView Name="View1"/><c:OutlineText Name="Label1" Classes="slotlabel" IsVisible="False"/><Border Name="TagB1" Classes="tag b"><TextBlock Text="B"/></Border></Panel></Border>
+      <Border Name="Slot2" Classes="slot" Grid.Row="0" Grid.Column="1"><Panel><c:ImageView Name="View2"/><c:OutlineText Name="Label2" Classes="slotlabel" IsVisible="False"/><Border Name="TagB2" Classes="tag b"><TextBlock Text="B"/></Border></Panel></Border>
+      <Border Name="Slot3" Classes="slot" Grid.Row="1" Grid.Column="0"><Panel><c:ImageView Name="View3"/><c:OutlineText Name="Label3" Classes="slotlabel" IsVisible="False"/><Border Name="TagB3" Classes="tag b"><TextBlock Text="B"/></Border></Panel></Border>
+      <Border Name="Slot4" Classes="slot" Grid.Row="1" Grid.Column="1"><Panel><c:ImageView Name="View4"/><c:OutlineText Name="Label4" Classes="slotlabel" IsVisible="False"/><Border Name="TagB4" Classes="tag b"><TextBlock Text="B"/></Border></Panel></Border>
+    </Grid>
+
+    <Border Name="PixelInfo" IsVisible="False" IsHitTestVisible="False" HorizontalAlignment="Left" VerticalAlignment="Top"
+            Background="#C0141A1E" BorderBrush="#40FFFFFF" BorderThickness="1" CornerRadius="6" Padding="8,6,8,9">
+      <StackPanel Spacing="8" Orientation="Horizontal">
+        <Border Width="120" Height="120" BorderBrush="#66FFFFFF" BorderThickness="1" VerticalAlignment="Top"><Image Name="PixelZoom" Stretch="Fill"/></Border>
+        <StackPanel VerticalAlignment="Top">
+          <TextBlock Name="PixelHead" FontFamily="Consolas,Menlo,DejaVu Sans Mono,monospace" FontSize="12" Foreground="#E6ECEF" TextWrapping="NoWrap" LineHeight="17"/>
+          <Border Height="1" Background="#50FFFFFF" Margin="0,5,0,5" HorizontalAlignment="Stretch"/>
+          <TextBlock Name="PixelText" FontFamily="Consolas,Menlo,DejaVu Sans Mono,monospace" FontSize="12" Foreground="#E6ECEF" TextWrapping="NoWrap" LineHeight="17"/>
+        </StackPanel>
+      </StackPanel>
+    </Border>
+
+    <Button Name="BtnPixelChip" Classes="tb on" IsVisible="False" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,14,14"
+            ToolTip.Tip="pixel info is on — panels stay hidden unless pinned · click, P or Esc: turn off"><PathIcon Data="{StaticResource IcPixel}"/></Button>
+
+    <Panel Name="HelpOverlay" IsVisible="False" Background="#70000000">
+      <Border Name="HelpCard" HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="640"
+              Background="#E6141C1F" BorderBrush="#40FFFFFF" BorderThickness="1" CornerRadius="10" Padding="0">
+        <Panel>
+        <c:SoyMilkPool Name="HelpMilkPool" IsHitTestVisible="False"/>
+        <DockPanel Margin="20,4,12,14">
+          <Grid DockPanel.Dock="Top" ColumnDefinitions="Auto,*" Margin="0,0,8,8">
+            <c:MillSpinner Name="HelpSpinner" Width="128" Height="128" VerticalAlignment="Top" Margin="0,-4,0,0"/>
+            <Grid Grid.Column="1" ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto" VerticalAlignment="Bottom" Margin="4,0,0,10">
+              <StackPanel Orientation="Horizontal">
+                <c:MillLabel Name="HelpLabel" VerticalAlignment="Center"/>
+                <TextBlock Name="HelpVersion" FontSize="10" Foreground="#6F7C84" Margin="22,1,0,0" VerticalAlignment="Center"/>
+              </StackPanel>
+              <Border Name="HelpDonate" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="12,0,0,0"
+                      Padding="9,2,10,3" CornerRadius="10" Cursor="Hand" Opacity="0.14"
+                      Background="#2633D6C4" BorderBrush="#6633D6C4" BorderThickness="1"
+                      ToolTip.Tip="support matdol">
+                <TextBlock FontSize="11">
+                  <Run Text="♥ " Foreground="#5FEBDD"/><Run Text="donate" Foreground="#BFF7F0"/>
+                </TextBlock>
+              </Border>
+              <TextBlock Name="HelpTagline" Grid.Row="1" Grid.ColumnSpan="2" FontSize="9.5" FontStyle="Italic" Foreground="#5F7684" Margin="3,1,0,0"/>
+            </Grid>
+          </Grid>
+          <Grid DockPanel.Dock="Bottom" ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" Margin="0,11,8,5">
+            <CheckBox Name="HelpSplashOpt" Classes="helpopt" Content="show the loading animation at startup"/>
+            <CheckBox Name="HelpFitOpt" Grid.Row="1" Classes="helpopt" Content="fit the window to the first image opened (solo view)"
+                      ToolTip.Tip="window = image size at 1:1, at least 320 × 240, at most the screen's work area"/>
+            <StackPanel Name="HelpLegal" Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Spacing="6" Margin="12,0,0,0"/>
+          </Grid>
+          <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Spacing="10" Margin="0,10,8,0">
+            <TextBlock Name="HelpNote" FontSize="11" Foreground="#8FA9BA"/>
+            <TextBlock Name="HelpNotesLink" FontSize="11" Foreground="#7CC8FF" Cursor="Hand" Text="formats &amp; notes…"/>
+          </StackPanel>
+          <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+            <Grid Name="HelpGrid" ColumnDefinitions="Auto,*" Margin="0,0,12,0"/>
+          </ScrollViewer>
+        </DockPanel>
+        <c:SoyMilkDrops Name="HelpMilkDrops" IsHitTestVisible="False"/>
+        </Panel>
+      </Border>
+    </Panel>
+
+    <Border Name="TopPanel" Classes="panel" VerticalAlignment="Top" Margin="0,14,0,0">
+      <Panel>
+      <Border Classes="panelbg"/>
+      <StackPanel Classes="content" Orientation="Horizontal">
+        <Button Classes="tb" Name="BtnOpen" ToolTip.Tip="Open into selected slot (Ctrl+O, double-click on image)"><PathIcon Data="{StaticResource IcOpen}"/></Button>
+        <Button Classes="tb" Name="BtnCapture" ToolTip.Tip="Capture view to clipboard (Ctrl+C) · Shift: save to file"><PathIcon Data="{StaticResource IcCapture}"/></Button>
+        <Border Classes="sep"/>
+
+        <Button Classes="tb" Name="BtnSlot1" ToolTip.Tip="slot 1: select (1) · files open here · right-click on image: set as B"><Panel Width="28" Height="28"><Border Classes="glyph" Width="24" Height="24" VerticalAlignment="Bottom" HorizontalAlignment="Left"><TextBlock Text="1" FontSize="13"/></Border><Border Name="BadgeB1" Classes="badge b"><TextBlock Text="B"/></Border></Panel></Button>
+        <Button Classes="tb" Name="BtnSlot2" ToolTip.Tip="slot 2: select (2) · files open here · right-click on image: set as B"><Panel Width="28" Height="28"><Border Classes="glyph" Width="24" Height="24" VerticalAlignment="Bottom" HorizontalAlignment="Left"><TextBlock Text="2" FontSize="13"/></Border><Border Name="BadgeB2" Classes="badge b"><TextBlock Text="B"/></Border></Panel></Button>
+        <Button Classes="tb" Name="BtnSlot3" ToolTip.Tip="slot 3: select (3) · files open here · right-click on image: set as B"><Panel Width="28" Height="28"><Border Classes="glyph" Width="24" Height="24" VerticalAlignment="Bottom" HorizontalAlignment="Left"><TextBlock Text="3" FontSize="13"/></Border><Border Name="BadgeB3" Classes="badge b"><TextBlock Text="B"/></Border></Panel></Button>
+        <Button Classes="tb" Name="BtnSlot4" ToolTip.Tip="slot 4: select (4) · files open here · right-click on image: set as B"><Panel Width="28" Height="28"><Border Classes="glyph" Width="24" Height="24" VerticalAlignment="Bottom" HorizontalAlignment="Left"><TextBlock Text="4" FontSize="13"/></Border><Border Name="BadgeB4" Classes="badge b"><TextBlock Text="B"/></Border></Panel></Button>
+        <Button Classes="tb sub" Name="BtnLayout" ToolTip.Tip="solo / 2x2 split (Ctrl+Tab)"><PathIcon Name="LayoutIcon" Data="{StaticResource IcSplit}"/></Button>
+        <Border Classes="sep"/>
+
+        <Button Classes="tb" Name="BtnZoom" Content="1X" Width="56" ToolTip.Tip="zoom (click: slider · double-click: 1:1)">
+          <Button.Flyout>
+            <Flyout Placement="Bottom" ShowMode="Transient">
+              <StackPanel Classes="pop" Width="300" Margin="4">
+                <TextBlock Name="ZoomLabel" Text="ZOOM 1X"/>
+                <Slider Name="ZoomSlider" Minimum="-4" Maximum="8" TickFrequency="1" IsSnapToTickEnabled="True" TickPlacement="BottomRight"/>
+                <TextBlock Text="1/16 · 1/8 · 1/4 · 1/2 · 1 · 2 · 4 · 8 · 16 · 32 · 64 · 128 · 256" FontSize="10" HorizontalAlignment="Center"/>
+              </StackPanel>
+            </Flyout>
+          </Button.Flyout>
+        </Button>
+        <Button Classes="tb" Name="BtnFull" ToolTip.Tip="fullscreen (Ctrl+Enter / Esc)"><PathIcon Data="{StaticResource IcFull}"/></Button>
+        <Border Classes="sep"/>
+
+        <Button Classes="tb" Name="BtnTitle" ToolTip.Tip="info overlay (I): file name, frame index, A/B tags"><PathIcon Data="{StaticResource IcInfo}"/></Button>
+        <Button Classes="tb" Name="BtnHelp" ToolTip.Tip="help (F1)"><PathIcon Data="{StaticResource IcHelp}"/></Button>
+      </StackPanel>
+      <Button Classes="pin" Name="BtnPinTop" VerticalAlignment="Bottom" Margin="0,0,-7,-9" ToolTip.Tip="pin: keep this panel shown ↔ auto-hide"><PathIcon Data="{StaticResource IcPin}"/></Button>
+      </Panel>
+    </Border>
+
+    <Border Name="BottomPanel" Classes="panel" VerticalAlignment="Bottom" Margin="0,0,0,14">
+      <Panel>
+      <Border Classes="panelbg"/>
+      <StackPanel Classes="content" Spacing="6">
+        <DockPanel Name="SeekRow" IsVisible="False">
+          <TextBlock Name="FrameLabel" DockPanel.Dock="Right" Width="110" TextAlignment="Right" VerticalAlignment="Center"
+                     Foreground="#C9D1D6" FontSize="12" FontFamily="Consolas,Menlo,DejaVu Sans Mono,monospace"/>
+          <Slider Name="Seek" Minimum="0" Maximum="0" IsSnapToTickEnabled="True" TickFrequency="1" MinWidth="500"/>
+        </DockPanel>
+
+        <StackPanel Orientation="Horizontal">
+          <Button Classes="tb" Name="BtnFormat" ToolTip.Tip="Pixel format / bit depth / image size / frame layout (selected slot)">
+            <PathIcon Data="{StaticResource IcFormat}"/>
+            <Button.Flyout>
+              <Flyout Placement="Top" ShowMode="Transient">
+                <StackPanel Classes="pop" Width="330" Margin="4">
+                  <StackPanel Name="RawFormatGroup" Classes="pop">
+                    <TextBlock Text="PIXEL FORMAT"/>
+                    <ComboBox Name="CbFormat" HorizontalAlignment="Stretch"/>
+                    <TextBlock Text="BIT DEPTH"/>
+                    <ComboBox Name="CbDepth" HorizontalAlignment="Stretch"/>
+                    <TextBlock Text="IMAGE SIZE"/>
+                    <ComboBox Name="CbSize" HorizontalAlignment="Stretch"/>
+                    <Grid ColumnDefinitions="*,Auto,*" Margin="0,6,0,0">
+                      <NumericUpDown Grid.Column="0" Name="NumW" Minimum="16" Maximum="16384" Increment="2" MinWidth="140" FormatString="0" HorizontalAlignment="Stretch"/>
+                      <TextBlock Grid.Column="1" Text="×" VerticalAlignment="Center" Margin="6,0"/>
+                      <NumericUpDown Grid.Column="2" Name="NumH" Minimum="16" Maximum="16384" Increment="2" MinWidth="140" FormatString="0" HorizontalAlignment="Stretch"/>
+                    </Grid>
+                    <TextBlock Name="SizeViewNote" IsVisible="False" FontSize="10" Margin="0,3,0,0" Text="3D: size of one view (L or R)"/>
+                  </StackPanel>
+                  <TextBlock Name="RawFormatNote" IsVisible="False" TextWrapping="Wrap" Text="format · depth · size are read from the file header"/>
+                  <StackPanel Name="CscGroup" Classes="pop">
+                    <TextBlock Text="COLOR MATRIX  (YUV → RGB)"/>
+                    <Grid ColumnDefinitions="*,Auto">
+                      <ComboBox Grid.Column="0" Name="CbMatrix" HorizontalAlignment="Stretch"/>
+                      <ComboBox Grid.Column="1" Name="CbRange" Width="128" Margin="6,0,0,0"/>
+                    </Grid>
+                  </StackPanel>
+                  <TextBlock Text="FRAME LAYOUT"/>
+                  <ComboBox Name="CbLayout" HorizontalAlignment="Stretch">
+                    <ComboBoxItem Content="Progressive (as stored)"/>
+                    <ComboBoxItem Content="Interlaced: separate fields (even ↑ / odd ↓)"
+                                  ToolTip.Tip="even lines → top half (top field), odd lines → bottom half (bottom field)"/>
+                    <ComboBoxItem Name="LayoutSbs" Content="Stereo 3D: Side-by-Side (L | R)"
+                                  ToolTip.Tip="raw files only · IMAGE SIZE = one view · raw frame is read as 2W × H"/>
+                    <ComboBoxItem Name="LayoutTb" Content="Stereo 3D: Top-and-Bottom (L / R)"
+                                  ToolTip.Tip="raw files only · IMAGE SIZE = one view · raw frame is read as W × 2H"/>
+                  </ComboBox>
+                  <StackPanel Name="RawGroup" Classes="pop" IsEnabled="False">
+                    <TextBlock Text="CAMERA RAW"/>
+                    <ComboBox Name="CbRawMode" HorizontalAlignment="Stretch" ToolTip.Tip="how this raw file is shown (also the default for raw files opened next)">
+                      <ComboBoxItem Name="RawModePreview" Content="Embedded preview JPEG (camera processed)"/>
+                      <ComboBoxItem Name="RawModeSensor" Content="Sensor data: CFA mosaic, native bits"/>
+                      <ComboBoxItem Name="RawModeHalf" Content="Half-size RGB from CFA (2×2, WB, gamma)"/>
+                    </ComboBox>
+                    <TextBlock Name="RawInfo" FontSize="10" Margin="0,3,0,0" TextWrapping="Wrap" Text="no camera raw file in the selected slot"/>
+                  </StackPanel>
+                  <Button Name="BtnApplyFormat" Content="Apply / Reload selected slot" HorizontalAlignment="Stretch" Margin="0,10,0,0"/>
+                </StackPanel>
+              </Flyout>
+            </Button.Flyout>
+          </Button>
+          <Border Classes="sep"/>
+
+          <Button Classes="tb on" Name="BtnChAll" ToolTip.Tip="all channels — full color (Ctrl+0)"><TextBlock Text="ALL" FontSize="10"/></Button>
+          <Button Classes="tb" Name="BtnCh0" ToolTip.Tip="single channel: Y / R (Ctrl+1 · again: all)"><Border Classes="glyph"><TextBlock Name="GlyphCh0" Text="Y"/></Border></Button>
+          <Button Classes="tb" Name="BtnCh1" ToolTip.Tip="single channel: U / G (Ctrl+2 · again: all)"><Border Classes="glyph"><TextBlock Name="GlyphCh1" Text="U"/></Border></Button>
+          <Button Classes="tb" Name="BtnCh2" ToolTip.Tip="single channel: V / B (Ctrl+3 · again: all)"><Border Classes="glyph"><TextBlock Name="GlyphCh2" Text="V"/></Border></Button>
+          <Button Classes="tb sub" Name="BtnColorCh" IsEnabled="False" ToolTip.Tip="tint single channel: in its own color ↔ gray (Ctrl+T)"><PathIcon Data="{StaticResource IcColor}"/></Button>
+          <Border Classes="sep"/>
+
+          <Button Classes="tb" Name="BtnGrid" ToolTip.Tip="block grid (G) · right-click: size W × H">
+            <PathIcon Data="{StaticResource IcGrid}"/>
+            <Button.ContextFlyout>
+              <Flyout Placement="Top">
+                <StackPanel Classes="pop" Width="300" Margin="4">
+                  <TextBlock Text="GRID SIZE  (W × H)"/>
+                  <Grid ColumnDefinitions="*,Auto,*">
+                    <NumericUpDown Grid.Column="0" Name="NumGridW" Minimum="1" Maximum="4096" Value="8" MinWidth="130" FormatString="0" HorizontalAlignment="Stretch"/>
+                    <TextBlock Grid.Column="1" Text="×" VerticalAlignment="Center" Margin="6,0"/>
+                    <NumericUpDown Grid.Column="2" Name="NumGridH" Minimum="1" Maximum="4096" Value="8" MinWidth="130" FormatString="0" HorizontalAlignment="Stretch"/>
+                  </Grid>
+                  <CheckBox Name="ChkGridSquare" Content="square (W = H)" IsChecked="True" Margin="0,6,0,0"/>
+                </StackPanel>
+              </Flyout>
+            </Button.ContextFlyout>
+          </Button>
+          <Button Classes="tb" Name="BtnPixelInfo" ToolTip.Tip="pixel info (P) — while on, unpinned panels stay hidden · Esc: off"><PathIcon Data="{StaticResource IcPixel}"/></Button>
+          <Border Classes="sep"/>
+
+          <Button Classes="tb" Name="BtnDiff" ToolTip.Tip="diff view |A − B| (− or 0)"><TextBlock Text="−" FontSize="18"/></Button>
+          <Button Classes="tb" Name="BtnAvg" ToolTip.Tip="average view (A + B)/2 (+)"><TextBlock Text="+" FontSize="18"/></Button>
+          <Button Classes="tb sub" Name="BtnDiffSet" ToolTip.Tip="compare settings (W: B/W)">
+            <PathIcon Data="{StaticResource IcCompare}"/>
+            <Button.Flyout>
+              <Flyout Placement="Top" ShowMode="Transient">
+                <StackPanel Classes="pop" Width="320" Margin="4">
+                  <TextBlock Name="DiffPair" Text="A: —   B: —"/>
+                  <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto" Margin="0,4,0,0">
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="D.THRESHOLD"/>
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="GAIN (1~64)"/>
+                    <NumericUpDown Grid.Row="1" Grid.Column="0" Name="NumDiffTh" Minimum="0" Maximum="65535" Value="0" FormatString="0" Margin="0,0,4,0"/>
+                    <NumericUpDown Grid.Row="1" Grid.Column="1" Name="NumDiffGain" Minimum="1" Maximum="64" Value="1" FormatString="0" Margin="4,0,0,0"/>
+                    <CheckBox Grid.Row="2" Grid.Column="0" Name="ChkDiffBw" Content="B/W (binary)" Margin="0,8,0,0"/>
+                    <CheckBox Grid.Row="2" Grid.Column="1" Name="ChkSync" Content="sync zoom/pan" IsChecked="True" Margin="4,8,0,0"/>
+                    <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Text="DIFF CENTER" Margin="0,10,0,0"/>
+                    <RadioButton Grid.Row="4" Grid.Column="0" Name="RadDiffZero" GroupName="DiffCenter" Content="0   |A−B|·gain" IsChecked="True" ToolTip.Tip="absolute difference: no difference = black"/>
+                    <RadioButton Grid.Row="4" Grid.Column="1" Name="RadDiffMid" GroupName="DiffCenter" Content="mid   (A−B)·gain" Margin="4,0,0,0" ToolTip.Tip="signed difference around the middle value (8bit: 128), clipped to 0 … max: no difference = gray, A brighter = lighter, A darker = darker"/>
+                  </Grid>
+                </StackPanel>
+              </Flyout>
+            </Button.Flyout>
+          </Button>
+          <Border Classes="sep"/>
+
+          <Button Classes="tb" Name="BtnFirst" ToolTip.Tip="first (Home)"><PathIcon Data="{StaticResource IcFirst}"/></Button>
+          <Button Classes="tb" Name="BtnPrev" ToolTip.Tip="prev (←)"><PathIcon Data="{StaticResource IcPrev}"/></Button>
+          <Button Classes="tb" Name="BtnPlay" ToolTip.Tip="play/pause (Space) · loop (Enter)"><PathIcon Name="PlayIcon" Data="{StaticResource IcPlay}"/></Button>
+          <Button Classes="tb" Name="BtnNext" ToolTip.Tip="next (→)"><PathIcon Data="{StaticResource IcNext}"/></Button>
+          <Button Classes="tb" Name="BtnLast" ToolTip.Tip="last (End)"><PathIcon Data="{StaticResource IcLast}"/></Button>
+          <ComboBox Name="CbFps" Width="72" Height="32" Margin="6,0,1,0" VerticalAlignment="Center" FontSize="12" ToolTip.Tip="frame rate"/>
+          <Button Classes="tb" Name="BtnLoop" ToolTip.Tip="loop"><PathIcon Data="{StaticResource IcLoop}"/></Button>
+        </StackPanel>
+      </StackPanel>
+      <Button Classes="pin" Name="BtnPinBottom" VerticalAlignment="Top" Margin="0,-9,-7,0" ToolTip.Tip="pin: keep this panel shown ↔ auto-hide"><PathIcon Data="{StaticResource IcPin}"/></Button>
+      </Panel>
+    </Border>
+  </Panel>
+</Window>

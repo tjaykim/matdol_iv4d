@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>CFBundleName</key>                 <string>matdol</string>
+  <key>CFBundleDisplayName</key>          <string>matdol</string>
+  <key>CFBundleIdentifier</key>           <string>@BUNDLE_ID@</string>
+  <key>CFBundleExecutable</key>           <string>matdol</string>
+  <key>CFBundleIconFile</key>             <string>matdol</string>
+  <key>CFBundlePackageType</key>          <string>APPL</string>
+  <key>CFBundleShortVersionString</key>   <string>@VERSION@</string>
+  <key>CFBundleVersion</key>              <string>@VERSION@</string>
+  <key>CFBundleInfoDictionaryVersion</key><string>6.0</string>
+  <key>LSMinimumSystemVersion</key>       <string>12.0</string>
+  <key>LSApplicationCategoryType</key>    <string>public.app-category.graphics-design</string>
+  <key>NSHighResolutionCapable</key>      <true/>
+  <key>NSPrincipalClass</key>             <string>NSApplication</string>
+  <key>NSHumanReadableCopyright</key>     <string>Copyright © 2026 tjaykim · MIT License</string>
+  <key>CFBundleDocumentTypes</key>
+  <array>
+    <dict>
+      <key>CFBundleTypeName</key>         <string>Image</string>
+      <key>CFBundleTypeRole</key>         <string>Viewer</string>
+      <key>LSHandlerRank</key>            <string>Alternate</string>
+      <key>LSItemContentTypes</key>
+      <array>
+        <string>public.image</string>
+        <string>public.camera-raw-image</string>
+      </array>
+    </dict>
+    <dict>
+      <key>CFBundleTypeName</key>         <string>Raw video / other data</string>
+      <key>CFBundleTypeRole</key>         <string>Viewer</string>
+      <key>LSHandlerRank</key>            <string>Alternate</string>
+      <key>CFBundleTypeExtensions</key>
+      <array>
+        <string>yuv</string><string>y4m</string><string>rgb</string><string>raw</string>
+        <string>bin</string><string>dpx</string><string>dsc</string>
+      </array>
+    </dict>
+  </array>
+</dict>
+</plist>

@@ -1,0 +1,76 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <AvaloniaUseCompiledBindingsByDefault>false</AvaloniaUseCompiledBindingsByDefault>
+    <AssemblyName>matdol</AssemblyName>
+    <AssemblyTitle>matdol</AssemblyTitle>
+    <Product>matdol</Product>
+    <Company>matdol</Company>
+    <ApplicationIcon>Assets\matdol.ico</ApplicationIcon>
+    <RootNamespace>Matdol</RootNamespace>
+    <Version>0.1.0</Version>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AssemblyMetadata Include="BuildDate" Value="$([System.DateTime]::Now.ToString('yyyy-MM-dd'))" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Matdol.Codecs\**" />
+    <Compile Remove="installer\**" />
+    <None Remove="installer\**" />
+    <None Remove="Matdol.Codecs\**" />
+    <EmbeddedResource Remove="Matdol.Codecs\**" />
+    <ProjectReference Include="Matdol.Codecs\Matdol.Codecs.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AvaloniaResource Include="Assets\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="12.1.*" />
+    <PackageReference Include="Avalonia.Desktop" Version="12.1.*" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="12.1.*" />
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="12.1.*" />
+    <PackageReference Include="SkiaSharp" Version="3.119.*" />
+  </ItemGroup>
+
+  <Target Name="CopyLauncherIcon" AfterTargets="Publish">
+    <Copy SourceFiles="Assets\Icons\icon-128.png" DestinationFiles="$(PublishDir)matdol.png" SkipUnchangedFiles="false" />
+    <Copy SourceFiles="dist\DSC-PLUGIN.txt" DestinationFolder="$(PublishDir)" SkipUnchangedFiles="false" />
+  </Target>
+
+  <Target Name="WarnTrimming" BeforeTargets="PrepareForPublish" Condition="'$(PublishTrimmed)' == 'true'">
+    <Warning Text="matdol: PublishTrimmed is not supported — the DSC plugin, settings and some XAML bindings may break. Turn it off in the publish profile." />
+  </Target>
+
+  <Target Name="FixOutputNameCase" BeforeTargets="CoreCompile;CopyFilesToOutputDirectory;PrepareForPublish">
+    <PropertyGroup>
+      <_NameLower>$(AssemblyName.ToLowerInvariant())</_NameLower>
+    </PropertyGroup>
+    <ItemGroup>
+      <_NameCaseCandidate Include="$([MSBuild]::EnsureTrailingSlash('$(IntermediateOutputPath)'))*.*;$([MSBuild]::EnsureTrailingSlash('$(OutDir)'))*.*;$([MSBuild]::EnsureTrailingSlash('$(PublishDir)'))*.*" />
+      <_NameCaseCandidate>
+        <SameIgnoringCase>$([System.IO.Path]::GetFileName('%(FullPath)').ToLowerInvariant().StartsWith('$(_NameLower).'))</SameIgnoringCase>
+        <SameExactly>$([System.IO.Path]::GetFileName('%(FullPath)').StartsWith('$(AssemblyName).'))</SameExactly>
+      </_NameCaseCandidate>
+      <_NameCaseStale Include="@(_NameCaseCandidate)" Condition="'%(SameIgnoringCase)' == 'true' and '%(SameExactly)' == 'false'" />
+    </ItemGroup>
+    <Message Importance="high" Text="matdol: removing old output files with different name case → @(_NameCaseStale)" Condition="'@(_NameCaseStale)' != ''" />
+    <Delete Files="@(_NameCaseStale)" />
+  </Target>
+
+</Project>

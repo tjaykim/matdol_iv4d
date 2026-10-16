@@ -1,0 +1,38 @@
+matdol — Privacy Policy
+
+Summary: matdol does not collect, store or send any personal information.
+
+1. What matdol does with your data
+   - Image files you open are read only on your own computer, for display.
+     They are never uploaded or sent anywhere.
+   - matdol does not use the network. It has no accounts, analytics,
+     telemetry, advertising, crash reporting or automatic update checks.
+   - matdol keeps a few display preferences (for example, whether the
+     toolbars are pinned and the camera raw mode) in a small settings file
+     in your user folder (matdol/settings.json). It contains no file names,
+     file history or personal information, and never leaves your computer.
+     Uninstalling matdol may leave this file; you can delete it at any time.
+
+2. Clipboard and saved captures
+   Captures (Ctrl+C / Ctrl+Shift+C) are placed on your system clipboard or
+   saved to a file that you choose, only when you ask for it.
+
+3. Donations and external links
+   If you choose to donate, or open a link from matdol, your web browser opens
+   an external website (for example a payment service). That website is
+   operated by a third party and its own privacy policy applies. matdol itself
+   receives no information about it.
+
+4. App stores
+   If you obtained matdol from an app store, the store may collect information
+   under its own privacy policy (for example, installation statistics). The
+   author may see aggregated statistics provided by the store, but not
+   information that identifies you.
+
+5. Children
+   matdol does not knowingly collect information from anyone, including
+   children.
+
+6. Changes
+   If a future version changes how data is handled, this policy will be
+   updated and shipped with that version.
