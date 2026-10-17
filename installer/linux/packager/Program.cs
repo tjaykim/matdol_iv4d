@@ -104,6 +104,7 @@ ctl.File("md5sums", Utf8(md5.ToString()), Reg, Dir);
 var debPath = Path.Combine(outDir, $"matdol_{version}_amd64.deb");
 WriteAr(debPath, new[] { ("debian-binary", Encoding.ASCII.GetBytes("2.0\n")), ("control.tar.gz", ctl.Build(true)), ("data.tar.gz", deb.Build(true)) }, mtime);
 Console.WriteLine($"[matdol] {debPath}");
+CopyLatest(debPath, "matdol_amd64.deb");
 
 var name = $"matdol-{version}-linux-x64";
 var tgz = new TarBuilder(mtime, name + "/");
@@ -123,7 +124,15 @@ tgz.File("README.txt", Utf8(
 var tgzPath = Path.Combine(outDir, name + ".tar.gz");
 File.WriteAllBytes(tgzPath, tgz.Build(true));
 Console.WriteLine($"[matdol] {tgzPath}");
+CopyLatest(tgzPath, "matdol-linux-x64.tar.gz");
 return 0;
+
+void CopyLatest(string src, string latestName)
+{
+    var dst = Path.Combine(outDir, latestName);
+    File.Copy(src, dst, true);
+    Console.WriteLine($"[matdol] {dst}");
+}
 
 sealed class TarBuilder
 {

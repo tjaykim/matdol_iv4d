@@ -29,6 +29,10 @@ copy /y Assets\Legal\Privacy.txt "%PUB%\legal\" >nul
 copy /y Assets\Legal\ThirdPartyNotices.txt "%PUB%\legal\" >nul
 powershell -NoProfile -Command "Compress-Archive -Force -Path '%PUB%\*' -DestinationPath '%CD%\artifacts\installers\matdol-%VER%-win-x64-portable.zip'"
 if errorlevel 1 ( echo [matdol] portable zip failed & exit /b 1 )
+copy /y "artifacts\installers\matdol-%VER%-win-x64-setup.exe" "artifacts\installers\matdol-win-x64-setup.exe" >nul
+copy /y "artifacts\installers\matdol-%VER%-win-x64-portable.zip" "artifacts\installers\matdol-win-x64-portable.zip" >nul
+if errorlevel 1 ( echo [matdol] copy to version-less names failed & exit /b 1 )
 echo.
 echo [matdol] done: artifacts\installers\matdol-%VER%-win-x64-setup.exe and -portable.zip
+echo [matdol]       plus version-less copies matdol-win-x64-setup.exe and matdol-win-x64-portable.zip
 endlocal

@@ -16,13 +16,14 @@ Press **F1** in the app for keys and usage.
 
 ## Download
 
-Get the latest version from [**Releases**](../../releases/latest).
+Latest version — other versions and checksums: [**Releases**](https://github.com/tjaykim/matdol/releases)
 
-| OS | File | Install |
+| OS | Download | Install |
 |---|---|---|
-| Windows 10/11 (x64) | `matdol-<ver>-win-x64-setup.exe` | Run the installer. Or unzip `…-win-x64-portable.zip` and run `matdol.exe` |
-| Ubuntu / Debian (x64) | `matdol_<ver>_amd64.deb` | `sudo apt install ./matdol_<ver>_amd64.deb` |
-| Any Linux (x64), no admin rights | `matdol-<ver>-linux-x64.tar.gz` | Extract, then `./install.sh` (installs to `~/.local`) |
+| Windows 10/11 (x64) | [matdol-win-x64-setup.exe](https://github.com/tjaykim/matdol/releases/latest/download/matdol-win-x64-setup.exe) | Run the installer |
+| Windows 10/11 (x64), portable | [matdol-win-x64-portable.zip](https://github.com/tjaykim/matdol/releases/latest/download/matdol-win-x64-portable.zip) | Unzip and run `matdol.exe` |
+| Ubuntu / Debian (x64) | [matdol_amd64.deb](https://github.com/tjaykim/matdol/releases/latest/download/matdol_amd64.deb) | `sudo apt install ./matdol_amd64.deb` |
+| Any Linux (x64), no admin rights | [matdol-linux-x64.tar.gz](https://github.com/tjaykim/matdol/releases/latest/download/matdol-linux-x64.tar.gz) | Extract, then run `./install.sh` in the extracted folder (installs to `~/.local`) |
 
 The Windows build is not code-signed yet — if SmartScreen warns, click *More info → Run anyway*.
 
